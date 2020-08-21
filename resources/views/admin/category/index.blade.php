@@ -19,6 +19,11 @@
 
     <div class="row">
         <div class="col-12">
+            @if(session('success'))
+                <div class="alert alert-default-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">List</h3>

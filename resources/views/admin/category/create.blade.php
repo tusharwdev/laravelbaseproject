@@ -33,7 +33,9 @@
                         <div class="card-header">
                             <h3 class="card-title">Category Create Form</h3>
                         </div>
-                        <form action="{{ route('category.create') }}" method="post">
+                        <form action="{{ route('category.store') }}" method="post">
+                            @method('post')
+                            @csrf
                         @include('admin.category._form')
                         </form>
                         <!-- /.card-body -->

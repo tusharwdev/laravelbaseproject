@@ -1,8 +1,6 @@
 <div class="card-body">
 
 
-        @csrf
-        @method('put')
         <label for="name">Name</label>
         @error('name') <i class="text-danger">{{ $message }}</i> @enderror
         <input name="name" value="{{ old('name',isset($category)?$category->name:null ) }}" class="form-control form-control-lg" type="text" placeholder="Enter Category Name">
