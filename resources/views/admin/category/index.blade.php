@@ -46,10 +46,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($categories as $category)
+                        @foreach($categories as $key=>$category)
 
                             <tr>
-                                <td>{{ $category->id }}</td>
+                                <td>{{ $categories->firstItem() + $key }}</td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->description }}</td>
 
@@ -59,7 +59,7 @@
                                     <form action="{{ route('category.destroy',$category->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="button button-danger">Delete</button>
+                                        <button type="submit" class="button button-danger" onclick="return confirm('Are You Sure To Delete ?')">Delete</button>
                                     </form>
                                 </td>
 
@@ -69,6 +69,7 @@
 
                         </tbody>
                     </table>
+                    {{ $categories->render() }}
                 </div>
                 <!-- /.card-body -->
             </div>

@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $data['title'] = 'Category List';
-        $data['categories'] = Category::orderBy('id','DESC')->get();
+        $data['categories'] = Category::orderBy('id','DESC')->paginate(10);
         return view('admin.category.index',$data);
     }
 

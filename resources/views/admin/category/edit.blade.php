@@ -33,38 +33,9 @@
                         <div class="card-header">
                             <h3 class="card-title">Category Update Form</h3>
                         </div>
-                        <div class="card-body">
-
-                            <form action="{{ route('category.update',$category->id) }}" method="post">
-                                @csrf
-                                @method('put')
-                            <label for="name">Name</label>
-                               @error('name') <i class="text-danger">{{ $message }}</i> @enderror
-                            <input name="name" value="{{ old('name',$category->name) }}" class="form-control form-control-lg" type="text" placeholder="Enter Category Name">
-                            <br>
-
-                            <label for="description">Description</label>
-                            <textarea name="description"  class="form-control" type="text" placeholder="Enter Category Description ">
-                                {{ old('name',$category->description) }}
-                            </textarea>
-
-                                <br>
-
-                            <label for="status">Status</label>
-                                @error('status') <i class="text-danger">{{ $message }}</i>@enderror
-                            <div class="form-check">
-                                <label for="Active">Active&nbsp;</label>
-                                <input type="radio" name="status" class="form-check-inline" value="Active"
-                                @if(old('status',$category->status) == "Active") checked @endif >
-                                <label for="Inactive">Inactive &nbsp;</label>
-                                <input type="radio" name="status" class="form-check-inline" value="Inactive"
-                                       @if(old('status',$category->status) == "Inactive") checked @endif >
-                            </div>
-
-                                <button type="submit">Submit</button>
-
-                            </form>
-                        </div>
+                        <form action="{{ route('category.update',$category->id) }}" method="post">
+                        @include('admin.category._form')
+                        </form>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
