@@ -33,7 +33,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Product Form</h3>
                         </div>
-                        <form action="{{ route('product.store') }}" method="post">
+                        <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
                             @method('post')
                             @csrf
                             @include('admin.product._form')

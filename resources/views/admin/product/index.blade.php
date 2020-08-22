@@ -63,7 +63,12 @@
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->category_id }}</td>
                                 <td>{{ $product->price }}</td>
-                                <td>{{ $product->image }}</td>
+                                <td>
+
+
+                                    <img src="{{ asset($product->image) }} " alt="Product Image" width="20%">
+
+                                </td>
                                 <td>{{ $product->color }}</td>
                                 <td>{{ $product->size }}</td>
                                 <td>{{ $product->status }}</td>

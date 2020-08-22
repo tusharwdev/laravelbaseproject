@@ -33,7 +33,7 @@
                         <div class="card-header">
                             <h3 class="card-title">product Update Form</h3>
                         </div>
-                        <form action="{{ route('product.update',$product->id) }}" method="post">
+                        <form action="{{ route('product.update',$product->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('put')
                         @include('admin.product._form')
