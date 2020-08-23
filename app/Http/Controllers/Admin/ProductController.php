@@ -18,7 +18,8 @@ class ProductController extends Controller
     public function index()
     {
         $data['title'] = 'List Of Product';
-        $data['products'] = Product::orderBy('id','DESC')->paginate(10);
+        $data['products'] = Product::with('category')->orderBy('id','DESC')->paginate(10);
+
         return view('admin.product.index',$data);
     }
 
@@ -149,6 +150,10 @@ class ProductController extends Controller
      */
     public function destroy(product $product)
     {
+        if ($product->image != null && file_exists($product->image)){
+            unlink($product->image);
+        }
+
         $product->delete();
         session()->flash('success','Product Deleted Successfully !');
         return redirect()->route('product.index');

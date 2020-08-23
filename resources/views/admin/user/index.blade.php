@@ -45,39 +45,28 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Image</th>
-                            <th>Color</th>
-                            <th>Size</th>
+                            <th>Email</th>
+                            <th>Phone</th>
                             <th>Status</th>
-                            <th>Description</th>
+                            <th>Address</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $key=>$product)
+                        @foreach($users as $key=>$user)
 
                             <tr>
-                                <td>{{ $products->firstItem() + $key }}</td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->category->name }}</td>
-                                <td>{{ $product->price }}</td>
-                                <td>
+                                <td>{{ $users->firstItem() + $key }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->phone }}</td>
+                                <td>{{ $user->status }}</td>
+                                <td>{{ $user->address }}</td>
 
+                                <td><span class="tag tag-success">{{ $user->status }}</span></td>
+                                <td><a href="{{ route('user.edit',$user->id) }}">Edit</a>
 
-                                    <img src="{{ asset($product->image) }} " alt="Product Image" width="20%">
-
-                                </td>
-                                <td>{{ $product->color }}</td>
-                                <td>{{ $product->size }}</td>
-                                <td>{{ $product->status }}</td>
-                                <td>{{ $product->description }}</td>
-
-                                <td><span class="tag tag-success">{{ $product->status }}</span></td>
-                                <td><a href="{{ route('product.edit',$product->id) }}">Edit</a>
-
-                                    <form action="{{ route('product.destroy',$product->id) }}" method="post">
+                                    <form action="{{ route('user.destroy',$user->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="button button-danger" onclick="return confirm('Are You Sure To Delete ?')">Delete</button>
@@ -90,7 +79,7 @@
 
                         </tbody>
                     </table>
-                    {{ $products->render() }}
+                    {{ $users->render() }}
                 </div>
                 <!-- /.card-body -->
             </div>
