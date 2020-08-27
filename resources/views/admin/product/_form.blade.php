@@ -54,6 +54,16 @@
                @if(old('status',isset($product)?$product->status:null ) == "Inactive") checked @endif >
     </div>
 
+    <label for="is_featured">Is Featured</label>
+    @error('is_featured') <i class="text-danger">{{ $message }}</i>@enderror
+    <div class="form-check">
+        <label for="is_featured">Active&nbsp;</label>
+        <input type="checkbox" name="is_featured" id="is_featured " class="form-check-inline" value="1"
+               @if(old('is_featured',isset($product)?$product->is_featured:null ) == 1) checked @endif >
+
+
+    </div>
+
     <label for="image">Image</label>
     <input name="image" class="form-control form-control-lg" type="file" placeholder="Upload Product Image">
     @error('image') <i class="text-danger">{{ $message }}</i> @enderror
