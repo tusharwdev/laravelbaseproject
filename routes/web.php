@@ -13,9 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/','Front\FrontController@home')->name('front.home');
+
+
+
+Route::middleware('auth')->group(function (){
+
+    Route::get('admin/dashboard',function() {
+    return view('admin.dashboard'); })->name('admin.dashboard');
+
+    Route::resource('admin/category','Admin\CategoryController');
+
+    Route::resource('admin/product','Admin\ProductController');
+
+    Route::resource('admin/user','Admin\UserController');
 });
-Route::get('admin/dashboard',function() {
-    return view('admin.dashboard');
-});
+
+
+
+Auth::routes(['register'=>false]);
+
+
