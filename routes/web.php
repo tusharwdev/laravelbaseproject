@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/','Front\FrontController@home')->name('front.home');
+
 
 
 Route::middleware('auth')->group(function (){
