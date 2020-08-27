@@ -58,7 +58,9 @@
     <input name="image" class="form-control form-control-lg" type="file" placeholder="Upload Product Image">
     @error('image') <i class="text-danger">{{ $message }}</i> @enderror
     <br>
-
+    @if(isset($product))
+    <img src="{{ asset($product->image) }}" alt="Product Image" width="15%"><br><br>
+    @endif
     <button type="submit">Submit</button>
 
 

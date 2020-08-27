@@ -18,7 +18,8 @@ class ProductController extends Controller
     public function index()
     {
         $data['title'] = 'List Of Product';
-        $data['products'] = Product::orderBy('id','DESC')->paginate('2');
+        $data['products'] = Product::with('category')->orderBy('id','DESC')->paginate(10);
+
         return view('admin.product.index',$data);
     }
 
@@ -46,7 +47,7 @@ class ProductController extends Controller
             'name' => 'required',
             'category_id' => 'required',
             'price' => 'required',
-            'image' => 'required',
+            'image' => 'mimes:jpg,jpeg,png,gif',
             'status' => 'required'
         ]);
 
@@ -57,10 +58,17 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->color = $request->color;
         $product->size = $request->size;
-        $product->image = $request->image;
         $product->status = $request->status;
         $product->stock = $request->stock;
+
+        if($request->hasFile('image')){
+            $image_path = $this->fileUpload($request->file('image'));
+            $product->image = $image_path;
+        }
+
+
         $product->save();
+
         session()->flash('success','Product Saved Successfully !');
         return redirect()->route('product.index');
     }
@@ -103,7 +111,7 @@ class ProductController extends Controller
             'name' => 'required',
             'category_id' => 'required',
             'price' => 'required',
-            'image' => 'required',
+            'image' => 'mimes:jpg,jpeg,png,gif',
             'status' => 'required'
         ]);
 
@@ -114,9 +122,21 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->color = $request->color;
         $product->size = $request->size;
-        $product->image = $request->image;
+
         $product->status = $request->status;
         $product->stock = $request->stock;
+
+        if($request->hasFile('image')){
+
+           $image_path = $this->fileUpload($request->file('image'));
+
+            if ($product->image != null && file_exists($product->image)){
+                unlink($product->image);
+            }
+            $product->image = $image_path;
+        }
+
+
         $product->save();
         session()->flash('success','Product Updated Successfully !');
         return redirect()->route('product.index');
@@ -130,8 +150,21 @@ class ProductController extends Controller
      */
     public function destroy(product $product)
     {
+        if ($product->image != null && file_exists($product->image)){
+            unlink($product->image);
+        }
+
         $product->delete();
         session()->flash('success','Product Deleted Successfully !');
         return redirect()->route('product.index');
+    }
+
+    private function fileUpload($img){
+        $path = 'images/product';
+
+        $filename = rand(0000,9999).'_'.$img->getFilename().'_'.$img->getClientOriginalName();
+        $img->move($path,$filename);
+
+        return $path.'/'.$filename ;
     }
 }
