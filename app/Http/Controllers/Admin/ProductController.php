@@ -59,6 +59,11 @@ class ProductController extends Controller
         $product->color = $request->color;
         $product->size = $request->size;
         $product->status = $request->status;
+
+        if ($request->has('is_featured')){
+        $product->is_featured = $request->is_featured;
+        }
+
         $product->stock = $request->stock;
 
         if($request->hasFile('image')){
@@ -124,6 +129,13 @@ class ProductController extends Controller
         $product->size = $request->size;
 
         $product->status = $request->status;
+
+        if ($request->has('is_featured')){
+            $product->is_featured = $request->is_featured;
+        }else{
+            $product->is_featured = 0;
+        }
+
         $product->stock = $request->stock;
 
         if($request->hasFile('image')){
