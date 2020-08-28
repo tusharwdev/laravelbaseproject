@@ -153,7 +153,7 @@
                                 <div class="overlay"></div>
                             </a>
                             <div class="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="#">{{ $featured_product->name }}</a></h3>
+                                <h3><a href="{{ route('front.product.details',$featured_product->id) }}">{{ $featured_product->name }}</a></h3>
                                 <div class="d-flex">
                                     <div class="pricing">
                                         <p class="price"><span class="mr-2 price-dc">{{ $featured_product->price }}</span><span class="price-sale">$80.00</span></p>

@@ -13,7 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','Front\FrontController@home')->name('front.home');
+
+
+Route::namespace('Front')->group(function (){
+    Route::get('/','FrontController@home')->name('front.home');
+    Route::get('product/{id}','FrontController@product_details')->name('front.product.details');
+    Route::get('add-to-cart/{productId}','CartController@addtocart')->name('add.to.cart');
+    Route::get('cart','CartController@cart')->name('cart');
+    Route::get('remove-form-cart/{productId}','CartController@removeFormCart')->name('remove.form.cart');
+});
+
 
 
 
